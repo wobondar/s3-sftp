@@ -1,0 +1,15 @@
+{
+    "s3_bucket_name": "your_s3_bucket_name",
+    "s3_region": "your_s3_region",
+    "aws_profile": "your_aws_profile",
+    "sftp_host": "your_sftp_host",
+    "sftp_port": 22,
+    "sftp_username": "your_sftp_username",
+    "sftp_password": "your_sftp_password",
+    "sftp_directory": "your_sftp_directory",
+    "sftp_connect_timeout": 30,
+    "concurrent_s3_downloads": 8,
+    "concurrent_sftp_uploads": 16,
+    "max_retries": 5,
+    "retry_delay": 1
+}
