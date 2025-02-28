@@ -1,3 +1,5 @@
+# yaml-language-server: $schema=https://goreleaser.com/static/schema.json
+version: 2
 project_name: s3-sftp
 
 before:
@@ -15,33 +17,33 @@ builds:
       - amd64
       - arm64
       - arm
-      - 386
+      - '386'
     ignore:
       - goos: darwin
-        goarch: 386
+        goarch: '386'
     main: ./cmd/s3-sftp
     ldflags:
-      - -s -w -X main.Version={{.Version}} -X main.Commit={{.ShortCommit}} -X main.BuildTime={{.Date}}
+      - -s -w -X main.Version={{.Tag}} -X main.Commit={{.ShortCommit}} -X main.BuildTime={{.Date}}
     id: "s3-sftp"
     binary: "s3-sftp"
 
 archives:
-  - format: tar.gz
-    name_template: '{{ .ProjectName }}-{{ .Version }}-{{ .Os }}-{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}'
+  - formats: ['tar.gz']
+    name_template: '{{ .ProjectName }}-{{ .Tag }}-{{ .Os }}-{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}'
     wrap_in_directory: true
     format_overrides:
       - goos: windows
-        format: zip
+        formats: ['zip']
     files:
       - README*
       - LICENSE*
 
 checksum:
-  name_template: '{{ .ProjectName }}-{{ .Version }}-checksums.txt'
+  name_template: '{{ .ProjectName }}-{{ .Tag }}-checksums.txt'
   algorithm: sha256
 
 snapshot:
-  name_template: SNAPSHOT-{{ .Commit }}
+  version_template: SNAPSHOT-{{ .Commit }}
 
 changelog:
   sort: asc
@@ -56,4 +58,4 @@ changelog:
 
 source:
   enabled: true
-  name_template: "{{ .ProjectName }}-{{ .Version }}-source"
+  name_template: "{{ .ProjectName }}-{{ .Tag }}-source"
