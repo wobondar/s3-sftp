@@ -105,6 +105,7 @@ Available targets:
   build-all          - Build for multiple platforms (Linux, macOS, Windows)
   clean              - Remove build artifacts
   vet                - Run go vet
+  release-check      - Check goreleaser release without publishing
   fmt                - Format code
   mod-tidy           - Tidy Go modules
   run                - Build and run the application

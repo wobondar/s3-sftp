@@ -26,7 +26,7 @@ COLOR_RED=\033[31m
 
 .DEFAULT_GOAL := help
 
-.PHONY: all check-deps build build-all clean vet fmt mod-tidy run help
+.PHONY: all check-deps build build-all clean vet release-check fmt mod-tidy run help
 
 all: check-deps clean build ## Check dependencies, clean, and build
 
@@ -56,6 +56,15 @@ vet: ## Run go vet
 	@echo "$(COLOR_BLUE)Running go vet...$(COLOR_RESET)"
 	$(GOVET) ./...
 	@echo "$(COLOR_GREEN)Vet complete!$(COLOR_RESET)"
+
+release-check: ## Check goreleaser release without publishing
+	@echo "$(COLOR_BLUE)Checking for release...$(COLOR_RESET)"
+	@goreleaser check
+	@echo "$(COLOR_GREEN)Release check complete!$(COLOR_RESET)"
+	@echo ""
+	@echo "$(COLOR_BLUE)Checking for release build without publishing...$(COLOR_RESET)"
+	@goreleaser release --snapshot --skip=publish --clean
+	@echo "$(COLOR_GREEN)Release build check complete!$(COLOR_RESET)"
 
 fmt: ## Format code
 	@echo "$(COLOR_BLUE)Formatting code...$(COLOR_RESET)"
