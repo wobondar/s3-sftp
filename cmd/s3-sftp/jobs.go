@@ -98,8 +98,22 @@ func processJobs(app *App, jobs []FileJob, s3Client *s3.Client) {
 					app.log.info.Printf("Upload worker %d: Reinitialize SFTP client", workerID)
 					sftpClient, sshClient, err = initSFTPClient(app)
 					if err != nil {
-						app.log.err.Printf("Upload worker %d: Failed to initialize SFTP client: %v", workerID, err)
-						return
+						// Yes, I'm too lazy to use for loop here with attempt counter. It's not a big deal for now.
+						// If it becomes a problem, I'll refactor it with configurable retry attempts in the config.
+						app.log.info.Printf("Upload worker %d: Failed to initialize SFTP client on second attempt: %v. Waiting 20 seconds before final attempt...", workerID, err)
+						time.Sleep(20 * time.Second)
+						app.log.info.Printf("Upload worker %d: Making final attempt to initialize SFTP client", workerID)
+						sftpClient, sshClient, err = initSFTPClient(app)
+						if err != nil {
+							app.log.err.Printf("Upload worker %d: Failed to initialize SFTP client on final attempt: %v", workerID, err)
+							// Log the failed file information for later retry
+							app.log.err.Printf("Upload worker %d: Failed to upload file after 3 attempts to initialize SFTP client", workerID)
+							app.log.err.Printf("\nRetry this file manually.\n\tFailed file: %s/%s\n\tKey: %s\n",
+								upload.job.Folder,
+								upload.job.File,
+								upload.job.Key)
+							return
+						}
 					}
 					success1 := uploadFile(app, workerID, upload.job, upload.tempPath, sftpClient)
 					if success1 {
