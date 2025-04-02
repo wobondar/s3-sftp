@@ -62,7 +62,7 @@ func uploadFile(app *App, workerID int, job FileJob, tempFilePath string, sftpCl
 	// Upload file to SFTP with retry
 	destPath := filepath.Join(destDir, job.File)
 	var uploadSuccess bool
-	for retry := 0; retry < app.conf.MaxRetries; retry++ {
+	for retry := range app.conf.MaxRetries {
 		if retry > 0 {
 			app.log.info.Printf("Upload worker %d: Retrying upload for %s (attempt %d/%d)", workerID, destPath, retry+1, app.conf.MaxRetries)
 			time.Sleep(app.conf.RetryDelay)

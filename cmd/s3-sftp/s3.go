@@ -44,7 +44,7 @@ func downloadFile(app *App, workerID int, job FileJob, s3Client *s3.Client) stri
 
 	// Download file from S3 with retry
 	var downloadSuccess bool
-	for retry := 0; retry < app.conf.MaxRetries; retry++ {
+	for retry := range app.conf.MaxRetries {
 		if retry > 0 {
 			app.log.info.Printf("Download worker %d: Retrying download for %s (attempt %d/%d)", workerID, job.Key, retry+1, app.conf.MaxRetries)
 			time.Sleep(app.conf.RetryDelay)

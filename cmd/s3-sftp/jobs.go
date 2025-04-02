@@ -46,7 +46,7 @@ func processJobs(app *App, jobs []FileJob, s3Client *s3.Client) {
 	)
 
 	// Start download workers
-	for i := 0; i < app.conf.ConcurrentS3Downloads; i++ {
+	for i := range app.conf.ConcurrentS3Downloads {
 		go func(workerID int) {
 			defer downloadWg.Done()
 			for job := range jobCh {
@@ -72,7 +72,7 @@ func processJobs(app *App, jobs []FileJob, s3Client *s3.Client) {
 	}()
 
 	// Start upload workers
-	for i := 0; i < app.conf.ConcurrentSFTPUploads; i++ {
+	for i := range app.conf.ConcurrentSFTPUploads {
 		go func(workerID int) {
 			defer uploadWg.Done()
 
