@@ -42,7 +42,7 @@ func main() {
 		debugFlag    = flag.Bool("debug", false, "Enable debug mode")
 		configPath   = flag.String("c", ConfigFilename, "Path to config file")
 		csvFilePath  = flag.String("csv", "", "Path to input CSV file (required)")
-		csvDelimiter = flag.String("delim", ";", "CSV delimiter")
+		csvDelimiter = flag.String("delim", ",", "CSV delimiter")
 	)
 
 	// Parse command line flags
