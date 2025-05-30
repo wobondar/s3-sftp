@@ -1,5 +1,9 @@
 # AWS S3 to SFTP File Mover
 
+[![Release](https://github.com/wobondar/s3-sftp/actions/workflows/release.yml/badge.svg)](https://github.com/wobondar/s3-sftp/actions/workflows/release.yml)
+![Code style: gofmt](https://img.shields.io/badge/code_style-gofmt-00ADD8.svg)
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/wobondar/s3-sftp)
+
 A high-performance CLI utility for transferring a large number of files from AWS S3 to SFTP servers with concurrency, retry mechanisms, and robust logging.
 
 ## Features
