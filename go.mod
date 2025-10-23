@@ -8,7 +8,7 @@ require (
 	github.com/aws/aws-sdk-go-v2 v1.39.3
 	github.com/aws/aws-sdk-go-v2/config v1.31.14
 	github.com/aws/aws-sdk-go-v2/service/s3 v1.88.6
-	github.com/pkg/sftp v1.13.9
+	github.com/pkg/sftp v1.13.10
 	golang.org/x/crypto v0.41.0
 )
 
