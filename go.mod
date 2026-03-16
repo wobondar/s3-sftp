@@ -1,15 +1,13 @@
 module github.com/wobondar/s3-sftp
 
-go 1.24
-
-toolchain go1.24.1
+go 1.25.0
 
 require (
 	github.com/aws/aws-sdk-go-v2 v1.41.4
 	github.com/aws/aws-sdk-go-v2/config v1.32.12
 	github.com/aws/aws-sdk-go-v2/service/s3 v1.97.1
 	github.com/pkg/sftp v1.13.10
-	golang.org/x/crypto v0.41.0
+	golang.org/x/crypto v0.49.0
 )
 
 require (
@@ -30,5 +28,5 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/sts v1.41.9 // indirect
 	github.com/aws/smithy-go v1.24.2 // indirect
 	github.com/kr/fs v0.1.0 // indirect
-	golang.org/x/sys v0.35.0 // indirect
+	golang.org/x/sys v0.42.0 // indirect
 )
